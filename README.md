@@ -557,6 +557,8 @@ Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.11.5/python-3.11.5-a
 Start-Process C:\\Temp\\python.exe -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1" -Wait
 ```
 
-## License
+## License 📄
+
+DEADSEC-BOTNET is licensed under the [MIT License](https://opensource.org/license/mit). See the full license in the [LICENSE](LICENSE) file for more details.
 
 For educational purposes only.
