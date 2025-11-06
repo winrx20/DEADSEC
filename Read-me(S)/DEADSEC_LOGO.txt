@@ -1,0 +1,76 @@
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                                                                           ║
+║     ██████╗ ███████╗ █████╗ ██████╗ ███████╗███████╗ ██████╗              ║
+║     ██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝              ║
+║     ██║  ██║█████╗  ███████║██║  ██║███████╗█████╗  ██║                   ║
+║     ██║  ██║██╔══╝  ██╔══██║██║  ██║╚════██║██╔══╝  ██║                   ║
+║     ██████╔╝███████╗██║  ██║██████╔╝███████║███████╗╚██████╗              ║
+║     ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝ ╚═════╝              ║
+║                                                                           ║
+║                  ELITE CYBER OPERATIONS DIVISION                          ║
+║                                                                           ║
+║                    💀 WE DO NOT FORGIVE 💀                               ║
+║                    💀 WE DO NOT FORGET  💀                               ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+                        WHO IS DEADSEC?
+
+A shadowy collective of elite hackers, digital phantoms who operate beyond 
+the reach of governments, corporations, and firewalls. Known for their precision, 
+caution, and relentless pursuit of cyber dominance, they exploit vulnerabilities, 
+disrupt systems, and extract secret data with surgical efficiency.
+
+Operating in complete anonymity, DeadSec thrives in the dark corners of the 
+Internet, leaving no trace—only encrypted whispers of their existence. Their 
+signature is chaos, their weapon is code, and their allegiance is to no one 
+but the truth hidden beneath layers of deception.
+
+Those who cross DeadSec rarely see them coming. By the time their presence 
+is felt, it's already too late.
+
+═══════════════════════════════════════════════════════════════════════════════
+
+                        OPERATIONAL CAPABILITIES
+
+    🎯 INITIAL ACCESS         │  Advanced payload deployment systems
+    ⚡ COMMAND & CONTROL      │  Encrypted C&C infrastructure  
+    🔑 CREDENTIAL HARVESTING  │  Multi-protocol credential extraction
+    ⌨️  KEYLOGGING            │  Silent keystroke monitoring
+    📸 SCREEN CAPTURE         │  Stealth screenshot acquisition
+    🌐 NETWORK SCANNING       │  Internal network reconnaissance
+    📁 DATA EXFILTRATION      │  Encrypted file transfer channels
+    🔓 PRIVILEGE ESCALATION   │  Automated privesc enumeration
+    📍 GEOLOCATION TRACKING   │  Multi-method location identification
+
+═══════════════════════════════════════════════════════════════════════════════
+
+                        OPERATIONAL SECURITY
+
+    ✓ ALL COMMUNICATIONS ENCRYPTED (AES-256)
+    ✓ NO LOGS RETAINED ON COMPROMISED SYSTEMS
+    ✓ ANONYMOUS ROUTING PROTOCOLS ACTIVE
+    ✓ DIGITAL FORENSICS COUNTERMEASURES ENABLED
+    ✓ ANTI-DETECTION MECHANISMS DEPLOYED
+    ✓ PERSISTENCE ACROSS SYSTEM REBOOTS
+    ✓ MULTI-PLATFORM COMPATIBILITY (Windows/Linux/macOS)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+            ⚠️  FOR AUTHORIZED PENETRATION TESTING ONLY  ⚠️
+
+This weapon system is designed exclusively for authorized security research 
+and penetration testing engagements. Unauthorized access to computer systems 
+is illegal and will be prosecuted to the fullest extent of the law.
+
+═══════════════════════════════════════════════════════════════════════════════
+
+                    "In the shadows, we are legion.
+                     In the light, we are invisible.
+                     We are DeadSec."
+
+═══════════════════════════════════════════════════════════════════════════════

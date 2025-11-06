@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEADSEC // COMMAND CENTER // ELITE CYBER OPERATIONS</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23ff0040%22/></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="deadsec-logo">
+                    <div class="logo-main">
+                        <div class="logo-symbol">◢◤</div>
+                        <div class="logo-text">DEADSEC</div>
+                        <div class="logo-symbol">◥◣</div>
+                    </div>
+                    <div class="logo-glitch" data-text="DEADSEC">DEADSEC</div>
+                </div>
+                <p>ELITE CYBER OPERATIONS DIVISION</p>
+                <div class="logo-tagline">WE DO NOT FORGIVE / WE DO NOT FORGET</div>
+                <div class="mission-status">
+                    <span class="status-indicator"></span>
+                    OPERATIONAL STATUS: ACTIVE
+                </div>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a class="nav-link active" data-page="dashboard"><span class="icon">[DASH]</span><span>Command Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" data-page="bots"><span class="icon">[BOTS]</span><span>Bot Network</span></a></li>
+                    <li class="nav-item"><a class="nav-link" data-page="payloads"><span class="icon">[WPNS]</span><span>Weapon Systems</span></a></li>
+                    <li class="nav-item"><a class="nav-link" data-page="commands"><span class="icon">[EXEC]</span><span>Remote Execution</span></a></li>
+                    <li class="nav-item"><a class="nav-link" data-page="files"><span class="icon">[FILE]</span><span>Data Extraction</span></a></li>
+                    <li class="nav-item"><a class="nav-link" data-page="av-evasion"><span class="icon">[EVAD]</span><span>Stealth Operations</span></a></li>
+                    <li class="nav-item"><a class="nav-link" data-page="console"><span class="icon">[CONS]</span><span>Intelligence Feed</span></a></li>
+                    <li class="nav-item"><a class="nav-link" data-page="settings"><span class="icon">[CONF]</span><span>System Config</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div id="dashboard" class="page active">
+                <div class="page-header">
+                    <h2>DEADSEC COMMAND CENTER</h2>
+                    <p>REAL-TIME SURVEILLANCE // COMPROMISED SYSTEMS ONLINE // ENCRYPTED COMMUNICATIONS ACTIVE</p>
+                    <div class="threat-level">
+                        <span class="threat-indicator">THREAT LEVEL: CRITICAL</span>
+                        <span class="operation-status">OPERATION STATUS: INFILTRATION ACTIVE</span>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">[BOTS]</div>
+                        <div class="stat-value" id="stat-total-bots">0</div>
+                        <div class="stat-label">Total Compromised</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">[LIVE]</div>
+                        <div class="stat-value" id="stat-online-bots">0</div>
+                        <div class="stat-label">Active Connections</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">[EXEC]</div>
+                        <div class="stat-value" id="stat-commands">0</div>
+                        <div class="stat-label">Commands Executed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">[SUCC]</div>
+                        <div class="stat-value" id="stat-success-rate">100%</div>
+                        <div class="stat-label">Mission Success Rate</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">RAPID STRIKE OPERATIONS</h3>
+                        <button class="btn btn-secondary" onclick="refreshAllData()">[REFRESH]</button>
+                    </div>
+                    <div class="payload-grid">
+                        <button class="payload-btn" onclick="quickDeploy('credential_harvester')">
+                            <span class="icon">[CRED]</span>
+                            <span>Credential Extraction</span>
+                        </button>
+                        <button class="payload-btn" onclick="quickDeploy('keylogger')">
+                            <span class="icon">[KEYS]</span>
+                            <span>Keystroke Monitor</span>
+                        </button>
+                        <button class="payload-btn" onclick="quickDeploy('screenshot')">
+                            <span class="icon">[SCRN]</span>
+                            <span>Screen Capture</span>
+                        </button>
+                        <button class="payload-btn" onclick="quickDeploy('network_scanner')">
+                            <span class="icon">[SCAN]</span>
+                            <span>Network Reconnaissance</span>
+                        </button>
+                        <button class="payload-btn" onclick="showPrivescDialog()" style="background: linear-gradient(135deg, #ff8c00, #ffd700);">
+                            <span class="icon">[PRIV]</span>
+                            <span>Privilege Escalation</span>
+                        </button>
+                        <button class="payload-btn" onclick="showDDoSDialog()" style="background: linear-gradient(135deg, #8b0000, #ff0040);">
+                            <span class="icon">[DDOS]</span>
+                            <span>Network Attack</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">ENCRYPTED ACTIVITY LOG</h3>
+                    </div>
+                    <div class="console" style="max-height: 300px;" id="dashboard-activity">
+                        <div class="log-entry info">
+                            <span class="log-timestamp">[DEADSEC]</span> Command Center operational // All systems armed
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="bots" class="page">
+                <div class="page-header">
+                    <h2>COMPROMISED ASSETS</h2>
+                    <p>INFECTED SYSTEMS // REMOTE ACCESS ESTABLISHED // FULL CONTROL ACHIEVED</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">ACTIVE COMPROMISES (<span id="bot-count">0</span>)</h3>
+                        <button class="btn btn-primary" onclick="refreshBots()">[REFRESH]</button>
+                    </div>
+                    <div class="bot-list" id="bot-list">
+                        <div class="empty-state">
+                            <div class="icon">[NULL]</div>
+                            <h3>NO COMPROMISED SYSTEMS</h3>
+                            <p>DEPLOY AGENTS TO INFECT TARGETS // ESTABLISH PERSISTENCE // EXPAND THE NETWORK</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="payloads" class="page">
+                <div class="page-header">
+                    <h2>WEAPON DEPLOYMENT</h2>
+                    <p>DIGITAL ARSENAL // SELECT TARGET AND LAUNCH EXPLOIT // SURGICAL PRECISION</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">TARGET SELECTION</h3>
+                    </div>
+                    <div id="selected-bot-info">
+                        <div class="empty-state">
+                            <div class="icon">[NULL]</div>
+                            <h3>NO TARGET ACQUIRED</h3>
+                            <p>NAVIGATE TO COMPROMISED ASSETS AND SELECT A TARGET SYSTEM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">DIGITAL WEAPONS ARSENAL</h3>
+                    </div>
+                    <div class="payload-grid">
+                        <button class="payload-btn" onclick="deployPayload('credential_harvester')">
+                            <span class="icon">[CRED]</span>
+                            <span>Credential Harvester</span>
+                        </button>
+                        <button class="payload-btn" onclick="deployPayload('keylogger')">
+                            <span class="icon">[KEYS]</span>
+                            <span>Keystroke Monitor</span>
+                        </button>
+                        <button class="payload-btn" onclick="deployPayload('screenshot')">
+                            <span class="icon">[SCRN]</span>
+                            <span>Screen Capture</span>
+                        </button>
+                        <button class="payload-btn" onclick="deployPayload('network_scanner')">
+                            <span class="icon">[SCAN]</span>
+                            <span>Network Reconnaissance</span>
+                        </button>
+                        <button class="payload-btn" onclick="deployPayload('file_exfiltrator')">
+                            <span class="icon">[FILE]</span>
+                            <span>Data Extractor</span>
+                        </button>
+                        <button class="payload-btn" onclick="deployPayload('privesc_checker')">
+                            <span class="icon">[PRIV]</span>
+                            <span>Privilege Escalation</span>
+                        </button>
+                        <button class="payload-btn" onclick="deployPayload('geolocation')">
+                            <span class="icon">[GEOL]</span>
+                            <span>Location Tracker</span>
+                        </button>
+                        <button class="payload-btn" onclick="deployPayload('persistence')">
+                            <span class="icon">[PERS]</span>
+                            <span>Persistence Module</span>
+                        </button>
+                        <button class="payload-btn" onclick="showPrivescDialog()">
+                            <span class="icon">[ELEV]</span>
+                            <span>System Elevation</span>
+                        </button>
+                        <button class="payload-btn" onclick="showDDoSDialog()">
+                            <span class="icon">[DDOS]</span>
+                            <span>Network Attack</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="commands" class="page">
+                <div class="page-header">
+                    <h2>REMOTE EXECUTION</h2>
+                    <p>DIRECT SYSTEM ACCESS // EXECUTE ARBITRARY CODE // COMPLETE COMPROMISE</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">TARGET SYSTEM</h3>
+                    </div>
+                    <div id="command-bot-info">
+                        <div class="empty-state">
+                            <div class="icon">[NULL]</div>
+                            <h3>NO TARGET ACQUIRED</h3>
+                            <p>NAVIGATE TO COMPROMISED ASSETS AND SELECT A TARGET SYSTEM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">REMOTE CODE EXECUTION</h3>
+                    </div>
+                    <div class="form-group"><label class="form-label">Command Type</label><select class="form-select" id="command-type"><option value="powershell">PowerShell</option><option value="cmd">CMD</option><option value="bash">Bash</option></select></div>
+                    <div class="form-group"><label class="form-label">Command</label><textarea class="form-textarea" id="command-input" placeholder="Enter your command here...
+
+Examples:
+PowerShell: whoami /all
+CMD: systeminfo
+Bash: uname -a"></textarea></div>
+                    <div class="btn-group"><button class="btn btn-primary" onclick="executeCommand()">[EXECUTE]</button><button class="btn btn-secondary" onclick="clearCommand()">[CLEAR]</button></div>
+                </div>
+                <div class="card"><div class="card-header"><h3 class="card-title">COMMAND OUTPUT // ENCRYPTED STREAM</h3></div><div class="console" id="command-output"><div class="log-entry info"><span class="log-timestamp">[DEADSEC]</span> Remote execution interface armed // Awaiting commands</div></div></div>
+            </div>
+
+            <div id="files" class="page">
+                <div class="page-header"><h2>� DATA EXFILTRATION</h2><p>SILENT FILE TRANSFERS // ENCRYPTED CHANNELS // NO LOGS LEFT BEHIND</p></div>
+                <div class="card"><div class="card-header"><h3 class="card-title">🎯 TARGET SYSTEM</h3></div><div id="file-bot-info"><div class="empty-state"><div class="icon">💀</div><h3>NO TARGET ACQUIRED</h3><p>NAVIGATE TO COMPROMISED ASSETS AND SELECT A TARGET SYSTEM</p></div></div></div>
+                <div class="operations-grid">
+                    <div class="card">
+                        <div class="card-header"><h3 class="card-title">📤 INFILTRATE FILE</h3></div>
+                        <div class="form-group"><label class="form-label">Local Path</label><input type="text" class="form-input" id="upload-local" placeholder="./payloads/script.ps1"></div>
+                        <div class="form-group"><label class="form-label">Remote Path</label><input type="text" class="form-input" id="upload-remote" placeholder="C:\Temp\script.ps1"></div>
+                        <button class="btn btn-primary" onclick="uploadFile()" style="width: 100%;">📤 Upload</button>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><h3 class="card-title">📥 EXFILTRATE DATA</h3></div>
+                        <div class="form-group"><label class="form-label">Remote Path</label><input type="text" class="form-input" id="download-remote" placeholder="C:\Temp\output.txt"></div>
+                        <div class="form-group"><label class="form-label">Local Path</label><input type="text" class="form-input" id="download-local" placeholder="./loot/output.txt"></div>
+                        <button class="btn btn-success" onclick="downloadFile()" style="width: 100%;">📥 Download</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="console" class="page">
+                <div class="page-header"><h2>📟 ENCRYPTED CONSOLE</h2><p>REAL-TIME OPERATION LOGS // ENCRYPTED ACTIVITY FEED // NO TRACE PROTOCOLS</p></div>
+                <div class="card">
+                    <div class="card-header"><h3 class="card-title">🖥️ ENCRYPTED SYSTEM CONSOLE</h3><button class="btn btn-danger" onclick="clearConsole()">🗑️ Purge Logs</button></div>
+                    <div class="console" id="main-console"><div class="log-entry info"><span class="log-timestamp">[DEADSEC]</span> 🔒 Encrypted console ready // Anonymous routing active</div></div>
+                </div>
+            </div>
+
+            <div id="av-evasion" class="page">
+                <div class="page-header">
+                    <h2>🛡️ ANTIVIRUS EVASION ARSENAL</h2>
+                    <p>SOPHISTICATED AV BYPASS // 31 EVASION TECHNIQUES // STEALTH OPERATIONS</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-icon">🛡️</div><div class="stat-value">31</div><div class="stat-label">Evasion Techniques</div></div>
+                    <div class="stat-card"><div class="stat-icon">📉</div><div class="stat-value">95% → 5%</div><div class="stat-label">Detection Rate</div></div>
+                    <div class="stat-card"><div class="stat-icon">💣</div><div class="stat-value" id="evaded-payloads-count">0</div><div class="stat-label">Evaded Payloads</div></div>
+                    <div class="stat-card"><div class="stat-icon">⚡</div><div class="stat-value">Real-time</div><div class="stat-label">Build Status</div></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">⚡ QUICK BUILD</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9em; margin-top: 8px;">Build all payloads with maximum evasion</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Evasion Technique</label>
+                        <select class="form-select" id="evasion-technique">
+                            <option value="full">🛡️ Full Evasion (All 31 Layers - Recommended)</option>
+                            <option value="encrypt">🔐 Encryption Only (Multi-layer XOR + Base64)</option>
+                            <option value="compress">📦 Compression Only (Zlib/GZip)</option>
+                            <option value="obfuscate">🎭 Obfuscation Only (Variable Randomization)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Output Directory</label>
+                        <input type="text" class="form-input" id="evasion-output-dir" value="evaded_payloads" placeholder="evaded_payloads">
+                    </div>
+
+                    <button class="btn btn-primary" onclick="buildAllEvadedPayloads()" style="width: 100%; font-size: 1.1em; padding: 15px;">
+                        🚀 BUILD ALL EVADED PAYLOADS (19 Files)
+                    </button>
+
+                    <div id="build-progress" style="display: none; margin-top: 20px; padding: 15px; background: rgba(0,255,0,0.1); border: 1px solid var(--deadsec-green); border-radius: 8px;">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <div class="spinner" style="width: 20px; height: 20px; border: 3px solid rgba(0,255,0,0.3); border-top-color: var(--deadsec-green); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                            <span style="color: var(--deadsec-green); font-weight: bold;">Building Evaded Payloads...</span>
+                        </div>
+                        <div id="build-progress-text" style="color: var(--text-secondary); font-family: 'Courier New', monospace; font-size: 0.9em;"></div>
+                    </div>
+
+                    <div id="build-results" style="margin-top: 20px;"></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">🎯 SINGLE PAYLOAD BUILDER</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9em; margin-top: 8px;">Build individual evaded payload</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Select Payload</label>
+                        <select class="form-select" id="single-payload-select">
+                            <optgroup label="Python Payloads">
+                                <option value="python_agent.py">Python Agent</option>
+                                <option value="credential_harvester.py">Credential Harvester</option>
+                                <option value="keylogger.py">Keylogger</option>
+                                <option value="screenshot_capture.py">Screenshot Capture</option>
+                                <option value="network_scanner.py">Network Scanner</option>
+                                <option value="file_exfiltrator.py">File Exfiltrator</option>
+                                <option value="privesc_checker.py">PrivEsc Checker</option>
+                                <option value="privesc_exploit.py">PrivEsc Exploit</option>
+                                <option value="ddos_attack.py">DDoS Attack</option>
+                            </optgroup>
+                            <optgroup label="PowerShell Payloads">
+                                <option value="windows_agent.ps1">Windows Agent</option>
+                                <option value="windows_credential_harvester.ps1">Windows Credential Harvester</option>
+                                <option value="windows_keylogger.ps1">Windows Keylogger</option>
+                                <option value="windows_screenshot.ps1">Windows Screenshot</option>
+                                <option value="windows_network_scanner.ps1">Windows Network Scanner</option>
+                                <option value="windows_file_exfiltrator.ps1">Windows File Exfiltrator</option>
+                                <option value="windows_geolocation.ps1">Windows Geolocation</option>
+                                <option value="windows_privesc_checker.ps1">Windows PrivEsc Checker</option>
+                                <option value="windows_privesc_exploit.ps1">Windows PrivEsc Exploit</option>
+                                <option value="windows_ddos.ps1">Windows DDoS</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Evasion Technique</label>
+                        <select class="form-select" id="single-evasion-technique">
+                            <option value="full">🛡️ Full Evasion (Maximum Stealth)</option>
+                            <option value="encrypt">🔐 Encryption Only</option>
+                            <option value="compress">📦 Compression Only</option>
+                            <option value="obfuscate">🎭 Obfuscation Only</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="buildSingleEvadedPayload()" style="width: 100%; font-size: 1.1em; padding: 15px;">
+                        🔨 BUILD SINGLE PAYLOAD
+                    </button>
+
+                    <div id="single-build-results" style="margin-top: 20px;"></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">📊 EVASION CAPABILITIES</h3>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                        <div style="background: rgba(255,0,64,0.1); padding: 15px; border-radius: 8px; border: 1px solid var(--deadsec-red);">
+                            <h4 style="color: var(--deadsec-red); margin-bottom: 10px;">🐍 Python Evasion (15 Layers)</h4>
+                            <ul style="color: var(--text-secondary); line-height: 1.8; font-size: 0.9em;">
+                                <li>✓ VM/Sandbox Detection (7 checks)</li>
+                                <li>✓ Sleep Evasion (Timing Analysis)</li>
+                                <li>✓ Anti-Debugging (3 methods)</li>
+                                <li>✓ Multi-layer Encryption (XOR+Base64+ROT13)</li>
+                                <li>✓ Double Compression (Zlib Level 9)</li>
+                                <li>✓ String Obfuscation (Hex+Base64)</li>
+                                <li>✓ Variable/Function Randomization</li>
+                                <li>✓ Import Obfuscation</li>
+                                <li>✓ Polymorphic Wrapper (Unique Signature)</li>
+                                <li>✓ Payload Splitting (4-part)</li>
+                                <li>✓ Junk Code Injection</li>
+                                <li>✓ Mutex-Based Execution Control</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(0,255,132,0.1); padding: 15px; border-radius: 8px; border: 1px solid var(--deadsec-green);">
+                            <h4 style="color: var(--deadsec-green); margin-bottom: 10px;">⚡ PowerShell Evasion (16 Layers)</h4>
+                            <ul style="color: var(--text-secondary); line-height: 1.8; font-size: 0.9em;">
+                                <li>✓ AMSI Bypass (3 methods)</li>
+                                <li>✓ ETW Bypass (Logging Disable)</li>
+                                <li>✓ VM/Sandbox Detection (8 checks)</li>
+                                <li>✓ Anti-Debugging</li>
+                                <li>✓ Sleep Evasion</li>
+                                <li>✓ String Obfuscation (Unicode Base64)</li>
+                                <li>✓ Variable Randomization</li>
+                                <li>✓ XOR Encryption + Base64</li>
+                                <li>✓ Double GZip Compression</li>
+                                <li>✓ Reflection Execution (ScriptBlock)</li>
+                                <li>✓ Polymorphic Wrapper (GUID+Hash)</li>
+                                <li>✓ Junk Code Injection</li>
+                                <li>✓ Mutex-Based Control</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">📈 EFFECTIVENESS MATRIX</h3>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; color: var(--text-secondary); border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: rgba(255,0,64,0.2); border-bottom: 2px solid var(--deadsec-red);">
+                                    <th style="padding: 12px; text-align: left;">Antivirus Product</th>
+                                    <th style="padding: 12px; text-align: center;">Before Evasion</th>
+                                    <th style="padding: 12px; text-align: center;">After Evasion</th>
+                                    <th style="padding: 12px; text-align: center;">Improvement</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <td style="padding: 12px;">Windows Defender</td>
+                                    <td style="padding: 12px; text-align: center; color: var(--deadsec-red);">95%</td>
+                                    <td style="padding: 12px; text-align: center; color: var(--deadsec-green);">5-10%</td>
+                                    <td style="padding: 12px; text-align: center; color: var(--deadsec-green); font-weight: bold;">↓ 85%</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <td style="padding: 12px;">Kaspersky</td>
+                                    <td style="padding: 12px; text-align: center; color: var(--deadsec-red);">98%</td>
+                                    <td style="padding: 12px; text-align: center; color: var(--warning);">20-30%</td>
+                                    <td style="padding: 12px; text-align: center; color: var(--deadsec-green); font-weight: bold;">↓ 68%</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <td style="padding: 12px;">Norton/Symantec</td>
+                                    <td style="padding: 12px; text-align: center; color: var(--deadsec-red);">92%</td>
+                                    <td style="padding: 12px; text-align: center; color: var(--deadsec-green);">10-15%</td>
+                                    <td style="padding: 12px; text-align: center; color: var(--deadsec-green); font-weight: bold;">↓ 77%</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <td style="padding: 12px;">McAfee</td>
+                                    <td style="padding: 12px; text-align: center; color: var(--deadsec-red);">90%</td>
+                                    <td style="padding: 12px; text-align: center; color: var(--deadsec-green);">8-12%</td>
+                                    <td style="padding: 12px; text-align: center; color: var(--deadsec-green); font-weight: bold;">↓ 78%</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px;">Avast/AVG</td>
+                                    <td style="padding: 12px; text-align: center; color: var(--deadsec-red);">88%</td>
+                                    <td style="padding: 12px; text-align: center; color: var(--deadsec-green);">12-18%</td>
+                                    <td style="padding: 12px; text-align: center; color: var(--deadsec-green); font-weight: bold;">↓ 70%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card" style="background: rgba(255, 193, 7, 0.1); border: 2px solid var(--warning);">
+                    <div class="card-header">
+                        <h3 class="card-title">⚠️ OPERATIONAL SECURITY</h3>
+                    </div>
+                    <div style="color: var(--text-secondary); line-height: 1.8;">
+                        <p style="margin-bottom: 15px;"><strong style="color: var(--warning);">CRITICAL GUIDELINES:</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li><strong style="color: var(--deadsec-green);">✓ DO:</strong> Use on systems you own or have written authorization to test</li>
+                            <li><strong style="color: var(--deadsec-green);">✓ DO:</strong> Rebuild payloads before each engagement for unique signatures</li>
+                            <li><strong style="color: var(--deadsec-green);">✓ DO:</strong> Test in isolated VMs before deployment</li>
+                            <li><strong style="color: var(--deadsec-red);">✗ DON'T:</strong> Upload to VirusTotal or public sandboxes (burns signatures)</li>
+                            <li><strong style="color: var(--deadsec-red);">✗ DON'T:</strong> Use on unauthorized systems (illegal)</li>
+                            <li><strong style="color: var(--deadsec-red);">✗ DON'T:</strong> Reuse payloads across multiple engagements</li>
+                        </ul>
+                        <p style="margin-top: 15px; color: var(--warning); font-weight: bold;">
+                            This tool is for authorized penetration testing and security research ONLY. 
+                            Unauthorized access to computer systems is a federal crime.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="settings" class="page">
+                <div class="page-header"><h2>🔧 SYSTEM CONFIGURATION</h2><p>OPERATION PARAMETERS // SECURE CONNECTION SETTINGS // DEADSEC PROTOCOLS</p></div>
+                <div class="card">
+                    <div class="card-header"><h3 class="card-title">🔒 DEADSEC SERVER CONFIGURATION</h3></div>
+                    <div class="form-group"><label class="form-label">C&C Server URL</label><input type="text" class="form-input" id="server-url" value="http://localhost:5000"></div>
+                    <div class="form-group"><label class="form-label">Auto-Refresh Interval (seconds)</label><input type="number" class="form-input" id="refresh-interval" value="10"></div>
+                    <div class="form-group"><label class="form-label">Default Output Directory</label><input type="text" class="form-input" id="output-dir" value="C:\Temp"></div>
+                    <button class="btn btn-primary" onclick="saveSettings()">💾 Save Settings</button>
+                </div>
+                <div class="card">
+                    <div class="card-header"><h3 class="card-title">💀 ABOUT DEADSEC</h3></div>
+                    <p style="color: var(--text-secondary); line-height: 1.8; font-family: 'Courier New', monospace;">
+                        <strong style="color: var(--deadsec-red); font-size: 1.2em;">DEADSEC // COMMAND CENTER</strong><br><br>
+                        <strong>Elite Cyber Operations Division</strong><br>
+                        Version 2.0.0 // Build CLASSIFIED<br><br>
+                        <em style="color: var(--deadsec-green);">"We are shadows in the digital realm. We do not forgive. We do not forget."</em><br><br>
+                        <strong style="color: var(--warning);">⚠️ AUTHORIZED OPERATIONS ONLY ⚠️</strong><br><br>
+                        This weapon system is designed exclusively for authorized penetration testing and security research. 
+                        Unauthorized access to computer systems is illegal and will be prosecuted.<br><br>
+                        <strong>OPERATIONAL SECURITY:</strong><br>
+                        • All communications encrypted<br>
+                        • No logs retained on compromised systems<br>
+                        • Anonymous routing protocols active<br>
+                        • Digital forensics countermeasures enabled
+                    </p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Privilege Escalation Dialog -->
+    <div id="privesc-dialog" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; align-items: center; justify-content: center;">
+        <div style="background: var(--dark-gray); border: 2px solid var(--deadsec-red); border-radius: 15px; padding: 30px; max-width: 700px; width: 90%; box-shadow: 0 0 50px rgba(255, 0, 64, 0.5);">
+            <h2 style="color: var(--deadsec-red); text-align: center; margin-bottom: 20px; text-transform: uppercase;">👑 PRIVILEGE ESCALATION</h2>
+            
+            <div class="form-group">
+                <label class="form-label">Escalation Method</label>
+                <select class="form-select" id="privesc-method">
+                    <option value="uac-bypass">UAC Bypass (FodHelper/EventVwr/Sdclt)</option>
+                    <option value="disable-uac">Disable UAC via Registry</option>
+                    <option value="add-admin">Add Current User to Administrators</option>
+                    <option value="create-admin">Create New Admin Account</option>
+                    <option value="check-exploits">Check for Privilege Escalation Vulnerabilities</option>
+                    <option value="dump-sam">Dump SAM Database (SYSTEM required)</option>
+                </select>
+            </div>
+            
+            <div id="privesc-create-admin-fields" style="display: none;">
+                <div class="form-group">
+                    <label class="form-label">New Admin Username</label>
+                    <input type="text" class="form-input" id="privesc-username" placeholder="admin">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" id="privesc-password" placeholder="P@ssw0rd!">
+                </div>
+                
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; color: var(--text-primary); cursor: pointer;">
+                        <input type="checkbox" id="privesc-autologon" style="margin-right: 10px;">
+                        Enable Auto-Login for New Admin
+                    </label>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 15px; margin-top: 25px;">
+                <button class="btn btn-danger" onclick="launchPrivesc()" style="flex: 1;">👑 ESCALATE PRIVILEGES</button>
+                <button class="btn btn-secondary" onclick="closePrivescDialog()" style="flex: 1;">❌ Cancel</button>
+            </div>
+            
+            <p style="color: var(--warning); text-align: center; margin-top: 20px; font-size: 0.9em;">
+                ⚠️ WARNING: Privilege escalation may trigger antivirus alerts. Use only on authorized systems.
+            </p>
+        </div>
+    </div>
+
+    <!-- DDoS Attack Dialog -->
+    <div id="ddos-dialog" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; align-items: center; justify-content: center;">
+        <div style="background: var(--dark-gray); border: 2px solid var(--deadsec-red); border-radius: 15px; padding: 30px; max-width: 600px; width: 90%; box-shadow: 0 0 50px rgba(255, 0, 64, 0.5);">
+            <h2 style="color: var(--deadsec-red); text-align: center; margin-bottom: 20px; text-transform: uppercase;">💥 DDoS ATTACK CONFIGURATION</h2>
+            
+            <div class="form-group">
+                <label class="form-label">Target (IP or Domain)</label>
+                <input type="text" class="form-input" id="ddos-target" placeholder="example.com or 192.168.1.1">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Port</label>
+                <input type="number" class="form-input" id="ddos-port" value="80" placeholder="80">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Attack Type</label>
+                <select class="form-select" id="ddos-type">
+                    <option value="http">HTTP Flood (Web Servers)</option>
+                    <option value="tcp">TCP SYN Flood (Any Service)</option>
+                    <option value="udp">UDP Flood (Game Servers)</option>
+                    <option value="slowloris">Slowloris (Connection Exhaustion)</option>
+                    <option value="dns">DNS Amplification (High Bandwidth)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Threads (Higher = More Aggressive)</label>
+                <input type="number" class="form-input" id="ddos-threads" value="100" min="1" max="500">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Duration (seconds)</label>
+                <input type="number" class="form-input" id="ddos-duration" value="60" min="10" max="600">
+            </div>
+            
+            <div style="display: flex; gap: 15px; margin-top: 25px;">
+                <button class="btn btn-danger" onclick="launchDDoS()" style="flex: 1;">💥 LAUNCH ATTACK</button>
+                <button class="btn btn-secondary" onclick="closeDDoSDialog()" style="flex: 1;">❌ Cancel</button>
+            </div>
+            
+            <p style="color: var(--warning); text-align: center; margin-top: 20px; font-size: 0.9em;">
+                ⚠️ WARNING: DDoS attacks are illegal without authorization. Use only on systems you own or have explicit permission to test.
+            </p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

